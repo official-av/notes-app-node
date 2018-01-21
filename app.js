@@ -1,16 +1,23 @@
-console.log("starting app.js");
-
+console.log("Your personal note saver.. Run --help for commands");
 const fs = require("fs");
 const _ = require("lodash");
 const yargs = require("yargs");
 
 const notes = require("./notes");
-const argv = yargs.argv;
+const argv = yargs
+  .command("add", "Add a note", {
+    title: { describe: "Your note's title", demand: true, alias: "t" },
+    body: { describe: "Your note's body", demand: true, alias: "b" }
+  }) //desc for add cmd
+  .command("list", "Get all notes", {}) //desc for list cmd
+  .command("read", "Get a note", {
+    title: { describe: "Your note's title", demand: true, alias: "t" }
+  }) //desc for read cmd
+  .command("remove", "Remove a note", {
+    title: { describe: "Your note's title", demand: true, alias: "t" }
+  }) //desc for remove cmd
+  .help().argv;
 var command = argv._[0];
-
-console.log("Yargs", argv);
-
-console.log("Command: ", command);
 
 if (command === "add") {
   //add note
@@ -26,7 +33,12 @@ if (command === "add") {
   }
 } else if (command === "list") {
   //list all notes
-  notes.getAll();
+  var notesList = notes.getAll();
+  if (notesList.length !== 0)
+    for (let note of notesList) {
+      notes.logNote(note);
+    }
+  else console.log("No notes found!");
 } else if (command === "read") {
   //read note
   var note = notes.getNote(argv.title);
