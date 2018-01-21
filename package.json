@@ -1,0 +1,19 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "simple note saving app based on node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/official-av/notes-app-node"
+  },
+  "author": "Anmol Vashistha",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "yargs": "^10.1.1"
+  }
+}
